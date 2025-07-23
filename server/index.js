@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000; // This line is updated for deployment
 
 app.use(cors());
 app.use(express.json());
@@ -20,10 +20,8 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 
-// --- Tell the server to use our new routes ---
 const resumeRouter = require('./routes/resumes');
 app.use('/resumes', resumeRouter);
-// ------------------------------------------
 
 app.get('/', (req, res) => {
   res.send('Hello from the Smart Resume Builder server!');
