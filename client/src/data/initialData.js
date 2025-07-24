@@ -1,3 +1,6 @@
+// client/src/data/initialData.js
+
+// This is our template with placeholder text
 export const initialResumeData = {
   personalInfo: {
     name: 'Your Name',
@@ -13,5 +16,20 @@ export const initialResumeData = {
     { id: 1, institution: 'University of Technology', degree: 'B.S. in Computer Science', graduationDate: '2022-12', gpa: '3.8' },
   ],
   skills: 'JavaScript, React, Node.js, Tailwind CSS, MongoDB',
-  customSections: [], // Add the new empty array
+  customSections: [],
+};
+
+// This is our completely blank template
+export const blankResumeData = {
+  personalInfo: {
+    name: '',
+    email: '',
+    phone: '',
+    linkedin: '',
+    github: '',
+  },
+  experience: [],
+  education: [],
+  skills: '',
+  customSections: [],
 };
