@@ -1,44 +1,53 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-const experienceSchema = new Schema({
-    company: String,
-    role: String,
-    startDate: String,
-    endDate: String,
-    description: String,
-});
+const experienceSchema = new Schema(
+  {
+    company: { type: String, trim: true, default: '' },
+    role: { type: String, trim: true, default: '' },
+    startDate: { type: String, trim: true, default: '' },
+    endDate: { type: String, trim: true, default: '' },
+    description: { type: String, default: '' },
+  },
+  { _id: false }
+);
 
-const educationSchema = new Schema({
-    institution: String,
-    degree: String,
-    graduationDate: String,
-    gpa: String,
-});
+const educationSchema = new Schema(
+  {
+    institution: { type: String, trim: true, default: '' },
+    degree: { type: String, trim: true, default: '' },
+    graduationDate: { type: String, trim: true, default: '' },
+    gpa: { type: String, trim: true, default: '' },
+  },
+  { _id: false }
+);
 
-// NEW: A schema for our dynamic, user-defined sections
-const customSectionSchema = new Schema({
-    title: { type: String, default: 'New Section' },
+const customSectionSchema = new Schema(
+  {
+    title: { type: String, trim: true, default: 'New Section' },
     content: { type: String, default: '• Add your content here...' },
-});
+  },
+  { _id: false }
+);
 
-const resumeSchema = new Schema({
+const resumeSchema = new Schema(
+  {
     personalInfo: {
-        name: { type: String, required: true },
-        email: { type: String, required: true },
-        phone: String,
-        linkedin: String,
-        github: String,
+      name: { type: String, required: true, trim: true },
+      email: { type: String, required: true, trim: true },
+      phone: { type: String, trim: true, default: '' },
+      linkedin: { type: String, trim: true, default: '' },
+      github: { type: String, trim: true, default: '' },
     },
-    experience: [experienceSchema],
-    education: [educationSchema],
-    skills: String,
-    customSections: [customSectionSchema], // NEW: Add the array of custom sections to our main blueprint
-}, {
+    experience: { type: [experienceSchema], default: [] },
+    education: { type: [educationSchema], default: [] },
+    skills: { type: String, default: '' },
+    customSections: { type: [customSectionSchema], default: [] },
+  },
+  {
     timestamps: true,
-});
+  }
+);
 
-const Resume = mongoose.model('Resume', resumeSchema);
-
-module.exports = Resume;
+module.exports = mongoose.model('Resume', resumeSchema);
