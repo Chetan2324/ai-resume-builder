@@ -1,20 +1,27 @@
 # Dependencies
-/node_modules
-/client/node_modules
-/server/node_modules
+node_modules/
+client/node_modules/
+server/node_modules/
 
-# Environment Variables (IMPORTANT: KEEPS YOUR SECRETS SAFE)
+# Environment variables
 .env
-/server/.env
+.env.*
+!.env.example
+client/.env
+server/.env
 
-# Production builds
-/build
-/client/build
+# Build artifacts
+build/
+client/build/
+coverage/
 
-# Log files
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# System files
+# OS/Editor
 .DS_Store
+.vscode/
+.idea/

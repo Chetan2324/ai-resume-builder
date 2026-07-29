@@ -2,33 +2,40 @@ import React from 'react';
 
 const SavedResumes = ({ ids, onLoad, onDelete }) => {
   if (ids.length === 0) {
-    return null; // Don't show anything if there are no saved IDs
+    return null;
   }
 
   return (
-    <div className="mb-6 p-4 bg-gray-50 rounded-lg shadow-inner">
-      <h3 className="text-lg font-bold mb-2 text-gray-700">Recently Saved Resumes</h3>
-      <ul className="list-none pl-0">
-        {ids.map(id => (
-          <li key={id} className="mb-1 text-sm flex justify-between items-center p-2 rounded-md hover:bg-gray-200">
-            <span 
-              className="text-blue-600 hover:underline cursor-pointer font-mono text-xs"
+    <section className="mb-6 rounded-lg bg-gray-50 p-4 shadow-inner" aria-label="Recently saved resumes">
+      <h3 className="mb-2 text-lg font-bold text-gray-700">Recently Saved Resumes</h3>
+      <ul className="list-none space-y-1 pl-0">
+        {ids.map((id) => (
+          <li
+            key={id}
+            className="flex items-center justify-between rounded-md p-2 text-sm hover:bg-gray-200"
+          >
+            <button
+              type="button"
+              className="font-mono text-xs text-blue-600 hover:underline"
               onClick={() => onLoad(id)}
               title="Click to load this resume"
+              aria-label={`Load resume ${id}`}
             >
               {id}
-            </span>
-            <button 
+            </button>
+            <button
+              type="button"
               onClick={() => onDelete(id)}
-              className="text-red-500 hover:text-red-700 font-bold ml-4 px-2 py-1 leading-none rounded-full hover:bg-red-100"
+              className="ml-4 rounded-full px-2 py-1 font-bold leading-none text-red-500 hover:bg-red-100 hover:text-red-700"
               title="Remove from this list"
+              aria-label={`Remove resume ${id} from local list`}
             >
               &times;
             </button>
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 };
 
